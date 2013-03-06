@@ -56,9 +56,9 @@ w = 1000
 f = 0
 v = 0
 
-fire = pygame.image.load("/home/andrea/Scrivania/andrea/pySM/fire.bmp")
-img = pygame.image.load("/home/andrea/Scrivania/andrea/pySM/spm.bmp")
-img2 = pygame.image.load("/home/andrea/Scrivania/andrea/pySM/spm2.bmp")
+fire = pygame.image.load("/home/andrea/Scrivania/andrea/pySM/images/fire.bmp")
+img = pygame.image.load("/home/andrea/Scrivania/andrea/pySM/images/spm.bmp")
+img2 = pygame.image.load("/home/andrea/Scrivania/andrea/pySM/images/spm2.bmp")
 man = Man(40, 358, 0, [img, img2])
 fireball = Fireball(0, 0, fire)
 screen = pygame.display.set_mode((w, h))
