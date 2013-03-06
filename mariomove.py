@@ -32,7 +32,7 @@ w = 1000
 
 man = Man(40, 358, 0)
 
-img = pygame.image.load("/home/andrea/Scrivania/spm.bmp")
+img = pygame.image.load("/home/andrea/Scrivania/andrea/pySM/spm.bmp")
 screen = pygame.display.set_mode((w, h))
 running = 1
  
@@ -43,7 +43,10 @@ while running:
 
     screen.fill((0, 0, 0))  
     key = pygame.key.get_pressed()
-    
+    if key[pygame.K_a]:
+        img = pygame.image.load("/home/andrea/Scrivania/andrea/pySM/spm2.bmp")
+    if key[pygame.K_d]:
+        img = pygame.image.load("/home/andrea/Scrivania/andrea/pySM/spm.bmp")
     man.move(key)
     man.jump(key)
 
