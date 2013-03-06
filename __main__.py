@@ -1,4 +1,5 @@
 import pygame
+import os
 from pygame.locals import *
 from Man import *
 
@@ -14,12 +15,12 @@ def run():
     v = 0
 
     #load images
-    fire = pygame.image.load("/home/andrea/Scrivania/andrea/pySM/images/fire.bmp")
-    img = pygame.image.load("/home/andrea/Scrivania/andrea/pySM/images/spm.bmp")
-    img2 = pygame.image.load("/home/andrea/Scrivania/andrea/pySM/images/spm2.bmp")
+    fire = pygame.image.load("images/fire.bmp")
+    img = pygame.image.load("images/spm.bmp")
+    img2 = pygame.image.load("images/spm2.bmp")
     #load and play music
     pygame.mixer.init(44100, -16, 2, 2048)
-    pygame.mixer.music.load("/home/andrea/Scrivania/andrea/pySM/song.mp3")
+    pygame.mixer.music.load("music/song.mp3")
     pygame.mixer.music.play(0, 0.0)
     
     man = Man(40, 358, 0, [img, img2])
