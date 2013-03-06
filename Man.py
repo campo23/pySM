@@ -3,11 +3,11 @@ from pygame.locals import *
 
 class Man:
     def __init__(self, go, up, wh, imgs):
-        #movimento
+        #movement
         self.go = go
-        #salto
+        #jump
         self.up = up
-        #posizione salto
+        #jump position
         self.wh = wh #0=none, 1=up, 2=down
 
 	self.imgs = imgs
@@ -17,6 +17,7 @@ class Man:
 	    screen.blit(self.imgs[self.index], (self.go-50,self.up-50))
 
     def move(self, key):
+        #move the character only if it's inside the screen
         if(key[pygame.K_d] and self.go<938): 
             self.go += 2
             self.index = 0
