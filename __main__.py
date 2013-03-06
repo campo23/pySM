@@ -46,7 +46,6 @@ def run():
         fireball.draw(screen, f)
         pygame.display.flip()
         pygame.time.wait(5)
-        print fireball.v
 
 if __name__ == '__main__':
     exit(run())
