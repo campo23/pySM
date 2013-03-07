@@ -28,8 +28,8 @@ def run():
     
     running = 1
     
-    rectMan = pygame.Rect(man.go-40, man.up-40, 105, 160)
-    rectOst = pygame.Rect(500, 410, 70, 70)
+    rectMan = pygame.Rect(man.go-35, man.up-40, 95, 160)
+    rectOst = pygame.Rect(500, 430, 50, 50)
      
     while running:
         event = pygame.event.poll()
@@ -37,7 +37,7 @@ def run():
             running = 0
         
         screen.fill((0, 0, 0))  
-        pygame.draw.rect(screen, (0, 0, 0), rectMan)
+        pygame.draw.rect(screen, color, rectMan)
         pygame.draw.rect(screen, color, rectOst)
         
         if(rectOst.colliderect(rectMan)):
@@ -56,8 +56,8 @@ def run():
         if(key[pygame.K_f]):
             man.fire(v)
 
-        rectMan = man.move(key, rectMan)
-        man.jump(key)
+        rectMan = man.move(key, rectMan, rectOst)
+        rectMan = man.jump(key, rectMan, rectOst)
         #draw the character 
         man.draw(screen)
 

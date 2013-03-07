@@ -35,30 +35,39 @@ class Man:
         for f in deleteF:
             self.fireballs.remove(f)
 
-    def move(self, key, rectMan):
+    def move(self, key, rectMan, rectOst):
         rectman = rectMan
         #move the character only if it's inside the screen
         if(key[pygame.K_d] and self.go<938): 
-            self.go += 2
+            if(rectMan.colliderect(rectOst) != 1 or rectMan.colliderect(rectOst) == 1 and self.index == 1):
+                self.go += 2
+                rectman = rectMan.move(2, 0)
             self.index = 0
-            rectman = rectMan.move(2, 0)
+            
         if(key[pygame.K_a] and self.go>40):
-            self.go -= 2
+            if(rectMan.colliderect(rectOst) != 1 or rectMan.colliderect(rectOst) == 1 and self.index == 0):
+                self.go -= 2
+                rectman = rectMan.move(-2, 0)
             self.index = 1
-            rectman = rectMan.move(-2, 0)
+            
         return rectman
 
-    def jump(self, key):
+    def jump(self, key, rectMan, rectOst):
+        rectman = rectMan
         if(self.wh == 0 and key[pygame.K_w]):
              self.wh = 1
         if(self.wh == 1 and self.up > 260):
              self.up -= 3
+             rectman = rectMan.move(0, -3)
         if(self.wh == 1 and self.up <= 260):
              self.wh = 2
         if(self.wh == 2 and self.up < 358):
              self.up += 3
+             if(rectMan.y < 318):
+                rectman = rectMan.move(0, 3)
         if(self.wh == 2 and self.up >= 358):
              self.wh = 0
+        return rectman
 
 class Fireball:
     def __init__(self, x, y, fire, v):
