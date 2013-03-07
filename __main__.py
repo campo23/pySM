@@ -13,53 +13,53 @@ def run():
     #direction of the character
     v = 0
 
+    color = (0, 255, 0)
     #load images
-    fire = pygame.image.load("images/fire.bmp")
-    img = pygame.image.load("images/spm.bmp")
-    img2 = pygame.image.load("images/spm2.bmp")
+    fire = pygame.image.load("pySM/images/fire.bmp")
+    img = pygame.image.load("pySM/images/spm.bmp")
+    img2 = pygame.image.load("pySM/images/spm2.bmp")
     #load and play music
     pygame.mixer.init(44100, -16, 2, 2048)
-    pygame.mixer.music.load("music/song.mp3")
+    pygame.mixer.music.load("pySM/music/song.mp3")
     pygame.mixer.music.play(0, 0.0)
     
-    man = Man(40, 358, 0, [img, img2])
-    fireball = Fireball(0, 0, fire)
+    man = Man(40, 358, 0, [img, img2, fire])
     screen = pygame.display.set_mode((w, h))
     
     running = 1
+    
+    rectMan = pygame.Rect(man.go-40, man.up-40, 105, 160)
+    rectOst = pygame.Rect(500, 410, 70, 70)
      
     while running:
         event = pygame.event.poll()
         if event.type == pygame.QUIT:
             running = 0
-
+        
         screen.fill((0, 0, 0))  
+        pygame.draw.rect(screen, (0, 0, 0), rectMan)
+        pygame.draw.rect(screen, color, rectOst)
+        
+        if(rectOst.colliderect(rectMan)):
+            if(color == (0, 255, 0)):
+                color = (255, 0 ,0)
+            else:
+                color = (0, 255, 0)
         key = pygame.key.get_pressed()
         if (key[pygame.K_a]):
             v = 1
         if (key[pygame.K_d]):
             v = 0
-        #if the ball isn't present in the screen, it changes
-        #the direction of the ball
-        if(f == 0 and v == 1):
-            fireball.v = 1
-        if(f == 0 and v == 0):
-            fireball.v = 0
+        
         #if the user press f key, initialize the variables
         #based on the position of the ball
-        if(f == 0 and key[pygame.K_f]):
-            f = 1
-            fireball.x = man.go
-            fireball.y = man.up
+        if(key[pygame.K_f]):
+            man.fire(v)
 
-        if(fireball.x > 1000 or fireball.x < -50):
-            f = 0
-
-        man.move(key)
+        rectMan = man.move(key, rectMan)
         man.jump(key)
-        #draw the character and the ball
+        #draw the character 
         man.draw(screen)
-        fireball.draw(screen, f)
 
         pygame.display.flip()
         pygame.time.wait(5)
