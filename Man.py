@@ -62,9 +62,12 @@ class Man:
         if(self.wh == 1 and self.up <= 260):
              self.wh = 2
         if(self.wh == 2 and self.up < 358):
-             self.up += 3
-             if(rectMan.y < 318):
-                rectman = rectMan.move(0, 3)
+             if(rectMan.colliderect(rectOst) != 1):
+                 self.up += 3
+                 if(rectMan.y < 318):
+                    rectman = rectMan.move(0, 3)
+             else:
+                 self.wh = 0
         if(self.wh == 2 and self.up >= 358):
              self.wh = 0
         return rectman
