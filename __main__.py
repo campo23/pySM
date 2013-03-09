@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 from Man import *
+from Button import Button
 
 def run():
 
@@ -30,8 +31,7 @@ def run():
     
     running = 1
     
-    rectPlayex = pygame.Rect(w/2-53, h/2-28, 106, 56)
-    rectPlay = pygame.Rect(w/2-50, h/2-25, 100, 50)
+    button = Button(color, (w/2-50, h/2-25), (100, 50)) 
     rectMan = pygame.Rect(man.go-35, man.up-40, 95, 160)
     rectOst = pygame.Rect(500, 430, 50, 50)
 
@@ -45,14 +45,10 @@ def run():
         
         screen.fill((0, 0, 0))  
         if(start == 0):
-            pygame.draw.rect(screen, (39, 139, 34), rectPlayex)
-            pygame.draw.rect(screen, (173, 255, 47), rectPlay)
+            button.draw(screen)
             screen.blit(startText, (465, 230))
-            if(pygame.mouse.get_pressed() == (1, 0, 0)):
-                mouse_pos = pygame.mouse.get_pos()
-                print mouse_pos
-                if(mouse_pos[0] in (range(450, 550)) and mouse_pos[1] in range(215, 255)):
-                    start = 1
+            if(button.isClicked()):
+                start = 1
         elif(start == 1):
             pygame.draw.rect(screen, color, rectMan)
             pygame.draw.rect(screen, color, rectOst)
