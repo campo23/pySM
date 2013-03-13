@@ -14,6 +14,7 @@ class Man:
         self.index = 0
         self.fireballs = []
         self.timeNewF = 0
+        self.totup = 0
     
     def fire(self,v):
         if len(self.fireballs) < 1 or self.timeNewF > 50:
@@ -38,13 +39,13 @@ class Man:
     def move(self, key, rectMan, rectOst):
         rectman = rectMan
         #move the character only if it's inside the screen
-        if(key[pygame.K_d] and self.go<938): 
+        if(key[pygame.K_d] and key[pygame.K_a] != 1 and self.go<938): 
             if(rectMan.colliderect(rectOst) != 1 or rectMan.colliderect(rectOst) == 1 and self.index == 1):
                 self.go += 2
                 rectman = rectMan.move(2, 0)
             self.index = 0
             
-        if(key[pygame.K_a] and self.go>40):
+        if(key[pygame.K_a] and key[pygame.K_d] != 1 and self.go>40):
             if(rectMan.colliderect(rectOst) != 1 or rectMan.colliderect(rectOst) == 1 and self.index == 0):
                 self.go -= 2
                 rectman = rectMan.move(-2, 0)
@@ -56,10 +57,17 @@ class Man:
         rectman = rectMan
         if(self.wh == 0 and key[pygame.K_w]):
              self.wh = 1
-        if(self.wh == 1 and self.up > 260):
+             self.totup = self.up - 80
+        if(self.wh == 1 and self.up >= self.totup):
              self.up -= 3
              rectman = rectMan.move(0, -3)
-        if(self.wh == 1 and self.up <= 260):
+             print "1"
+             print self.up
+             print "2"
+             print self.totup
+             print "3"
+             print rectMan.y
+        if(self.wh == 1 and self.up < self.totup):
              self.wh = 2
         if(self.wh == 2 and self.up < 358):
              if(rectMan.colliderect(rectOst) != 1):
